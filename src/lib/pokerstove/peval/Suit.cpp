@@ -4,9 +4,10 @@
  */
 #include <iostream>
 #include <stdexcept>
-#include <boost/format.hpp>
+#include <fmt/string.h>
 #include "Card.h"
 #include "Suit.h"
+
 
 using namespace std;
 using namespace pokerstove;
@@ -117,7 +118,7 @@ string Suit::decodeSuitASCII_EXT(int card) const
             c = '?';
     }
 
-    string buf = (boost::format("%c") % c).str();         // boost::format may be overkill
+	string buf = fmt::format("{:c}", c);
     return buf;
 }
 

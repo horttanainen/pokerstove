@@ -167,7 +167,7 @@ const Card& PokerHand::operator[](size_t index) const
 
 void PokerHand::sort() const
 {
-    std::sort(_cards.begin(), _cards.begin()+_ncards);
+    std::sort(_cards, _cards + _ncards);
 }
 
 void PokerHand::pushCardToFront(size_t nth) const
@@ -189,7 +189,7 @@ static bool rankgreater(Card c1, Card c2)
 
 void PokerHand::sortRanks() const
 {
-    std::sort(_cards.begin(), _cards.begin()+_ncards, rankgreater);
+    std::sort(_cards, _cards + _ncards, rankgreater);
 }
 
 void PokerHand::sortEval() const

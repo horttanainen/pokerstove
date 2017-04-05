@@ -5,7 +5,7 @@
 #define PENUM_SHOWDOWNENUMERATOR_H_
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <pokerstove/peval/PokerHandEvaluator.h>
 #include "CardDistribution.h"
 
@@ -21,7 +21,7 @@ public:
      */
     std::vector<EquityResult> calculateEquity (const std::vector<CardDistribution>& dists,
                                                const CardSet& board,
-                                               boost::shared_ptr<PokerHandEvaluator> peval) const;
+                                               std::shared_ptr<PokerHandEvaluator> peval) const;
 };
 }
 

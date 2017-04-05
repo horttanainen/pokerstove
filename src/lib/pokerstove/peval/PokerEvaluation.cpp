@@ -4,7 +4,9 @@
  */
 #include <iostream>
 #include <stdexcept>
-#include <boost/format.hpp>
+#include <vector>
+#include <algorithm>
+#include <fmt/format.h>
 #include <pokerstove/util/lastbit.h>
 #include "Card.h"
 #include "PokerEvaluation.h"
@@ -460,7 +462,7 @@ string PokerEvaluation::toStringCannon() const
     }
 
     string ranks = topr + botr + kick;
-    ret = (boost::format("%s %-5s") % hand % ranks).str();
+    ret = fmt::format("{} {:<5}", hand, ranks);
 
     return ret;
 
@@ -490,7 +492,7 @@ void PokerEvaluation::generateLowballLookupA5()
             if (nbits == 5)
                 break;
         }
-        cout << boost::format("    %6d, // %s\n") % lowbits % toBitString(lowbits);
+		cout << fmt::format("    {:6}, // {}\n", lowbits, toBitString(lowbits));
     }
     cout << "};\n";
 }
@@ -511,7 +513,7 @@ void PokerEvaluation::generateBottomRankMask()
                 break;
             }
         }
-        cout << boost::format("    %6d, // %s\n") % lowbits % toBitString(lowbits);
+        cout << fmt::format("    {:6}, // {}\n", lowbits, toBitString(lowbits));
     }
     cout << "};\n";
 }

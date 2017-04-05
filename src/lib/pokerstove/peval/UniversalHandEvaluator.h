@@ -17,7 +17,6 @@
 //  eval b: high/low/227/A25/Badugi/3CP
 
 #include <vector>
-#include <boost/lexical_cast.hpp>
 #include <pokerstove/util/combinations.h>
 #include "Card.h"
 #include "CardSet.h"

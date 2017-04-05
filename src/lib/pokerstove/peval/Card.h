@@ -6,7 +6,6 @@
 #define PEVAL_CARD_H_
 
 #include <string>
-#include <boost/cstdint.hpp>
 
 namespace pokerstove
 {

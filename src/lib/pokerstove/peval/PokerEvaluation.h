@@ -7,7 +7,7 @@
 
 #include <iosfwd>
 #include <climits>
-#include <boost/operators.hpp>
+
 #include "Rank.h"
 
 namespace pokerstove

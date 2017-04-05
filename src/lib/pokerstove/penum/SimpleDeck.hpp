@@ -8,7 +8,7 @@
 #include <string>
 #include <algorithm>
 #include <functional>
-#include <boost/array.hpp>
+
 #include <pokerstove/util/lastbit.h>
 #include <pokerstove/peval/Card.h>
 #include <pokerstove/peval/CardSet.h>
@@ -109,7 +109,7 @@ public:
     void remove (const pokerstove::CardSet& cards)
     {
         int decr = CardSet(cards | dead()).size();
-        stable_partition (_deck.begin(), _deck.end(), bind2nd(isLive(), cards));
+        stable_partition (_deck, _deck + (sizeof(_deck)/sizeof(*_deck)), bind2nd(isLive(), cards));
         _current = STANDARD_DECK_SIZE - decr;
     }
 
@@ -123,7 +123,7 @@ public:
 
     void shuffle ()
     {
-        std::random_shuffle(_deck.begin(), _deck.end());
+        std::random_shuffle(_deck, _deck + (sizeof(_deck) / sizeof(*_deck)));
         reset (); //_current = 0;
     }
 
@@ -163,7 +163,7 @@ public:
 
 private:
     // these are the data which track info about the deck
-    boost::array<CardSet,STANDARD_DECK_SIZE> _deck;
+	CardSet _deck[STANDARD_DECK_SIZE];
     size_t _current;
 };
 }

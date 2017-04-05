@@ -8,7 +8,6 @@
 #include <iosfwd>
 #include <vector>
 #include <string>
-#include <boost/cstdint.hpp>
 #include "Rank.h"
 #include "Suit.h"
 

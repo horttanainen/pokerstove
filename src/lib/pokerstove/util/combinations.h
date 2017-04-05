@@ -6,7 +6,7 @@
 #define COMMON_ENUM_COMBINATIONS_H_
 
 #include <algorithm>
-#include <boost/lexical_cast.hpp>
+
 #include <pokerstove/util/utypes.h>
 #include <pokerstove/util/lastbit.h>
 
@@ -69,7 +69,7 @@ namespace pokerstove
     {
       std::string ret;
       for (size_t i=0; i<size(); i++)
-        ret += boost::lexical_cast<std::string>((*this)[i]) + " ";
+        ret += std::to_string((*this)[i]) + " ";
       return ret;
     }
 

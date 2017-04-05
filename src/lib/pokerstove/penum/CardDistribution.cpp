@@ -5,15 +5,15 @@
 
 #include <iostream>
 #include <vector>
-#include <boost/algorithm/string.hpp>
+
+#include <fmt/string.h>
+#include <cppext/split.h>
+
 #include <boost/math/special_functions/binomial.hpp>
-#include <boost/foreach.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
+
 #include <pokerstove/util/combinations.h>
 #include <pokerstove/peval/Card.h>
 
-#define boost_foreach BOOST_FOREACH
 
 using namespace std;
 using namespace pokerstove;
@@ -55,7 +55,7 @@ string CardDistribution::str() const
     for (size_t i=0; i<_handList.size(); i++)
     {
         const CardSet& hand = _handList[i];
-        ret += (i>0?",":"") + (boost::format("%s=%.3f") % hand.str() % weight(hand)).str();
+        ret += (i>0?",":"") + fmt::format("{}={:.3f}", hand.str(), weight(hand));
     }
     return ret;
 }
@@ -143,19 +143,18 @@ bool CardDistribution::parse(const std::string& input)
         return true;
     }
 
-    vector<string> hands;
-    boost::split (hands, input, boost::is_any_of(","));
-    boost_foreach(const string& h, hands)
+    vector<string> hands = cppext::split(input, string(","));
+    for(const string& h : hands)
     {
         // handle the weight
         double weight = 1.0;
-        if (boost::contains(h,"="))
+        if (h.find("=") != string::npos)
         {
             // trap for the case where the input ends with "="
             string::size_type weightPos = h.rfind("=")+1;
             if (weightPos == h.size())
                 return false;
-            weight = boost::lexical_cast<double>(h.substr(weightPos));
+			weight = stod(h.substr(weightPos));
         }
 
         // handle the hand one card at a time.
@@ -197,8 +196,8 @@ void CardDistribution::removeCards(const CardSet& dead)
 double CardDistribution::weight() const
 {
     double total = 0.0;
-    std::pair<CardSet,double> w;
-    boost_foreach(w, _weights)
+
+    for(std::pair<CardSet, double> w : _weights)
     {
         total += w.second;
     }

@@ -5,7 +5,6 @@
 #ifndef PEVAL_POKERHAND_H_
 #define PEVAL_POKERHAND_H_
 
-#include <boost/array.hpp>
 #include "Card.h"
 #include "CardSet.h"
 
@@ -133,9 +132,9 @@ protected:
 
 private:
 #ifdef MUTABLE
-    mutable             //!< _cards can be mutable to handle sorts, better solution?
+	mutable             //!< _cards can be mutable to handle sorts, better solution?
 #endif
-    boost::array<Card,MAX_PHCARDS> _cards;
+	Card _cards[MAX_PHCARDS];
     uint8_t   _ncards;
 };
 

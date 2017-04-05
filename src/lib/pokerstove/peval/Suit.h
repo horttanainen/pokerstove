@@ -6,8 +6,6 @@
 #define PEVAL_SUIT_H_
 
 #include <string>
-#include <boost/operators.hpp>
-#include <boost/cstdint.hpp>
 
 namespace pokerstove
 {

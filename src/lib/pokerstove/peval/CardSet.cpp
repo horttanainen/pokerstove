@@ -9,10 +9,6 @@
 #include <limits>
 #include <vector>
 #include <set>
-#include <boost/array.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/format.hpp>
-#include <boost/algorithm/string.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <pokerstove/util/combinations.h>
 #include "Rank.h"
@@ -23,8 +19,6 @@
 #include "PokerEvaluationTables.h"
 
 using namespace std;
-using namespace boost;
-using namespace pokerstove;
 using namespace pokerstove;
 
 // some suit mask macros
@@ -1170,23 +1164,21 @@ static inline bool badugiless(int c1, int c2)
 PokerEvaluation CardSet::evaluateBadugi() const
 {
     // get our ranks orgainzed in lowball order by suit
-    boost::array<int,4> suits =
+		int suits[4] =
     {
-        {
             LOWBALL_ROTATE_RANKS(C()),
             LOWBALL_ROTATE_RANKS(D()),
             LOWBALL_ROTATE_RANKS(H()),
             LOWBALL_ROTATE_RANKS(S())
-        }
     };
 
     // We try to save some time by being smart about which suits we loop
     // over.  Empty suits are ignored, and suits with one rank are used
     // as is.  At the end we sort to make next_permutation to work properly.
-    boost::array<int,4> ind;
+    int ind[4];
     int bmust = 0;
     size_t k=0;
-    for (size_t i=0; i<suits.size(); i++)
+    for (size_t i=0; i< (sizeof(suits) / sizeof(*suits)); i++)
     {
         switch (nRanksTable[suits[i]])
         {
@@ -1199,7 +1191,7 @@ PokerEvaluation CardSet::evaluateBadugi() const
                 ind[k++] = suits[i];
         };
     }
-    sort(ind.begin(),ind.begin()+k);
+    sort(ind,ind + k);
 
     // now enter into the fray to find the best possible badugi.  suit
     // order in this loop matters, so we cycle through the permutations
@@ -1220,7 +1212,7 @@ PokerEvaluation CardSet::evaluateBadugi() const
         if (badugiless(branks, minbadugi))
             minbadugi = branks;
     }
-    while (next_permutation(ind.begin(),ind.begin()+k));
+    while (next_permutation(ind, ind + k));
 
     // encode the badugi, it's a low hand where aces plays low.  we set
     // the number of missing suits in the badugi as the "major rank". the

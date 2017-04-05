@@ -7,8 +7,7 @@
 
 #include <vector>
 #include <string>
-#include <boost/shared_ptr.hpp>
-#include <boost/lexical_cast.hpp>
+#include <memory>
 #include "CardSet.h"
 #include "PokerHandEvaluation.h"
 
@@ -44,10 +43,10 @@ struct EquityResult
     std::string str() const
     {
         std::string ret =
-            boost::lexical_cast<std::string>(winShares) + " " +
-            boost::lexical_cast<std::string>(tieShares) + " " +
-            boost::lexical_cast<std::string>(equity) + " " +
-            boost::lexical_cast<std::string>(equity2);
+            std::to_string(winShares) + " " +
+            std::to_string(tieShares) + " " +
+            std::to_string(equity) + " " +
+            std::to_string(equity2);
         return ret;
     }
 };
@@ -83,7 +82,7 @@ public:
      * - 'e'    stud/8
      * - 'b'    badugi
      */
-    typedef boost::shared_ptr<PokerHandEvaluator> eval_ptr;
+    typedef std::shared_ptr<PokerHandEvaluator> eval_ptr;
     static eval_ptr alloc(const std::string& strid);
 
     /**

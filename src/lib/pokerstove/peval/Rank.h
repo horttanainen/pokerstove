@@ -6,7 +6,6 @@
 #define PEVAL_RANK_H_
 
 #include <string>
-#include <boost/cstdint.hpp>
 
 namespace pokerstove
 {
