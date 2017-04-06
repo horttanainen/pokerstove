@@ -14,7 +14,7 @@ configure_file("${PROJECT_SOURCE_DIR}/Config.h.in"
                "${PROJECT_BINARY_DIR}/Config.h")
 
 # Also search for includes in PROJECT_BINARY_DIR to find config.h.
-include_directories(lib/ ext/ "${PROJECT_BINARY_DIR}")
+include_directories(lib/ "${PROJECT_BINARY_DIR}")
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(lib/pokerstove/peval)
 add_subdirectory(lib/pokerstove/penum)

@@ -15,6 +15,11 @@ endforeach()
 # peval library
 add_library(peval ${lib_sources})
 
-target_link_libraries(peval fmt)
+target_link_libraries(peval fmt boost-binomial)
+
+target_include_directories(
+    peval
+    PUBLIC ${boost-binomial_INCLUDE_DIRS} 
+    )
 
 add_test(TestPeval ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/peval_tests)

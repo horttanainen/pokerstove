@@ -17,11 +17,12 @@ endforeach()
 # penum library
 add_library(penum ${lib_sources})
 
-target_link_libraries(penum fmt cppext)
+target_link_libraries(penum fmt cppext boost-binomial)
 
 target_include_directories(
     penum
     PUBLIC ${cppext_INCLUDE_DIRS}
+    PUBLIC ${boost-binomial_INCLUDE_DIRS}
     )
 
 add_test(TestPenum ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/penum_tests)

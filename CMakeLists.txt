@@ -28,6 +28,12 @@ download_project(PROJ cppext
     ${UPDATE_DISCONNECTED_IF_AVAILABLE}
     )
 
+download_project(PROJ boost-binomial
+    GIT_REPOSITORY https://github.com/horttanainen/boost-binomial.git
+    GIT_TAG master
+    ${UPDATE_DISCONNECTED_IF_AVAILABLE}
+    )
+
 add_subdirectory(
     ${googletest_SOURCE_DIR}
     ${googletest_BINARY_DIR}
@@ -36,6 +42,11 @@ add_subdirectory(
 add_subdirectory(
     ${fmt_SOURCE_DIR}
     ${fmt_BINARY_DIR}
+    )
+
+add_subdirectory(
+    ${boost-binomial_SOURCE_DIR}
+    ${boost-binomial_BINARY_DIR}
     )
 
 add_subdirectory(
