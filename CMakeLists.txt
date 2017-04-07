@@ -5,16 +5,18 @@ include(DownloadProject.cmake)
 
 set(UPDATE_DISCONNECTED_IF_AVAILABLE "UPDATE_DISCONNECTED 1")
 
-include(DownloadProject.cmake)
-download_project(PROJ                googletest
-    GIT_REPOSITORY      https://github.com/google/googletest.git
-    GIT_TAG             master
-    ${UPDATE_DISCONNECTED_IF_AVAILABLE}
-    )
+if(dev_build)
+    include(DownloadProject.cmake)
+    download_project(PROJ                googletest
+        GIT_REPOSITORY      https://github.com/google/googletest.git
+        GIT_TAG             master
+        ${UPDATE_DISCONNECTED_IF_AVAILABLE}
+        )
 
-# Prevent GoogleTest from overriding our compiler/linker options
-# when building with Visual Studio
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    # Prevent GoogleTest from overriding our compiler/linker options
+    # when building with Visual Studio
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif(dev_build)
 
 download_project(PROJ fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt.git
@@ -34,10 +36,12 @@ download_project(PROJ boost-binomial
     ${UPDATE_DISCONNECTED_IF_AVAILABLE}
     )
 
-add_subdirectory(
-    ${googletest_SOURCE_DIR}
-    ${googletest_BINARY_DIR}
-    )
+if(dev_build)
+    add_subdirectory(
+        ${googletest_SOURCE_DIR}
+        ${googletest_BINARY_DIR}
+        )
+endif()
 
 add_subdirectory(
     ${fmt_SOURCE_DIR}

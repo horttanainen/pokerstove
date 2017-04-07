@@ -9,7 +9,7 @@ add_executable(penum_tests ${test_sources})
 target_link_libraries(penum_tests penum peval gtest gmock_main ${CMAKE_THREAD_LIBS_INIT})
 
 # build the library sources from all sources, removing the test sources
-file(GLOB lib_sources *.cpp)
+file(GLOB lib_sources *.cpp *.h* )
 foreach(source_file ${test_sources})
   list(REMOVE_ITEM lib_sources ${source_file})
 endforeach()
